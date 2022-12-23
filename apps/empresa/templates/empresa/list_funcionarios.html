@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <h2>Funcionarios da Empresa {{ request.user.funcionario.empresa }}</h2>
+
+    {% for funcionario in object_list %}
+
+        <p>{{funcionario}} : 
+            <a href="{% url 'edit-funcionario' funcionario.id %}?next={{ request.path }}">Editar</a> 
+            <a href="{% url 'delet-funcionario' funcionario.id %}?next={{ request.path }}">Excluir</a> 
+        </p><br>
+    
+        {% empty %}
+            <h3>Não a funcionarios cadastrados nesta empresa !!!</h3>
+
+    {% endfor %}
+
+
+{% endblock %}
