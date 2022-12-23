@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+def departamentoView(request):
+    return render(request,template_name='departamento.html')
+
+
