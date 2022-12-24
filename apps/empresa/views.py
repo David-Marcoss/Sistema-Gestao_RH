@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView,UpdateView,ListView
 from .models import Empresa
 from apps.funcionarios.models import Funcionario
-
+from apps.departamentos.models import Departamento
 
 class CadastroEmpresaView(CreateView):
     template_name = 'form.html'
@@ -61,4 +61,17 @@ class ListFuncionarioView(ListView):
         else:
              return None
 
+class ListDepartamentosView(ListView):
+    template_name = 'departamentos/list_departamentos.html'    
+    model= Departamento
+
+    def get_queryset(self):
+        
+        if self.request.user.funcionario:
+            
+            empresa = self.request.user.funcionario.empresa
+
+            return empresa.departamentos.all()
+        else:
+             return None
 

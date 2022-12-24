@@ -3,6 +3,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load bootstrap %}
 
 {% block main %}
 
@@ -24,14 +25,7 @@
                 <div class="form-row text-center">
                     {% csrf_token %}
                     
-                    {{ field.non_field_errors }}
-    
-                    {% for field in form %}
-                        <p>{{field.errors}}</p>
-                        <p>{{field.label}}</p>
-                        <p>{{field}}</p>
-                    
-                    {% endfor %}
+                    {{ form|bootstrap }}
                 
                 </div>
     

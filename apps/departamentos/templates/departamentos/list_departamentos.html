@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <h2>Departamentos da Empresa {{ request.user.funcionario.empresa }}</h2>
+
+    <li class="nav-item btn-danger">
+        <a class="nav-link" href="{% url 'create-departamento' %}?next={{ request.path }}">Cadastrar Funcionario</a>
+    </li>
+
+    {% for departamento in object_list %}
+
+        <p>{{ departamento }} : 
+            <a href="{% url 'edit-departamento' departamento.id %}?next={{ request.path }}">Editar</a> 
+            <a href="{% url 'delet-departamento' departamento.id %}?next={{ request.path }}">Excluir</a> 
+        </p><br>
+    
+        {% empty %}
+            <h3>Não a Departamentos cadastrados nesta empresa !!!</h3>
+
+    {% endfor %}
+
+
+{% endblock %}

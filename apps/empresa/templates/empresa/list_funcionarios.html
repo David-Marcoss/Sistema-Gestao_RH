@@ -5,6 +5,10 @@
 
     <h2>Funcionarios da Empresa {{ request.user.funcionario.empresa }}</h2>
 
+    <li class="nav-item btn-danger">
+        <a class="nav-link" href="{% url 'create-funcionario' %}?next={{ request.path }}">Cadastrar Funcionario</a>
+    </li>
+
     {% for funcionario in object_list %}
 
         <p>{{funcionario}} : 
