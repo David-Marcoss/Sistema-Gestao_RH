@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 
 class UpdateFuncionarioView(UpdateView):
-    template_name = 'form.html'
+    template_name = 'form_funcionario.html'
     model = Funcionario
     fields = ['nome','departamento']
     

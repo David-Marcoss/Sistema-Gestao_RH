@@ -1,0 +1,61 @@
+<!-- Este arquivo serve para criação de um form padrao -->
+
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap %}
+
+{% block main %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{{ titulo }}</h1>
+        </div>
+    </div>
+</section>
+
+<div class="container pb-5">
+    <div class="row">
+
+        <div class="my-3 col-md-2"></div>
+        <div class="my-3 col-md-8">
+            <form method="post" enctype="multipart/form-data" >
+                
+                <div class="form-row text-center">
+                    {% csrf_token %}
+                    
+                    {{ form|bootstrap }}
+                
+                </div>
+    
+
+                <div class="text-center">
+                    <button class="btn btn-lg btn-danger" onclick="window.open(document.referrer,'_self');">Voltar</button>
+                    <button class="btn btn-lg btn-primary" type="submit">{{ botao }}</button>
+                </div>
+            
+            </form>
+    
+        </div>
+        <div class="my-3 col-md-2"></div>
+    </div>
+
+    <divdiv class="row">
+        <br>
+        <a  href="{% url 'cadastrar-documento' %}?next={{ request.path }}"><button class="btn btn-lg btn-primary" type="submit">Cadastrar documento</button></a>
+    </div>
+
+    <div class="row">
+        <br>
+        <h3>Documentos do funcionario:</h3>
+        {% for i in object.documentos.all %}
+            <br>
+            <a  href="{{i.arquivo.url}}">{{i.descricao}}</a>
+        {% endfor%}
+    </div>
+    
+</div>
+
+
+{% endblock%}

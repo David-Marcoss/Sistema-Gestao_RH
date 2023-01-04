@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+    <h2>Banco de horas da Empresa {{ empresa }}</h2>
+
+    {% for i in horas %}
+
+        <p>{{i.funcionario}} | {{i.motivo}} | {{i.horas}}</p>
+        <br>
+    
+        {% empty %}
+            <h3>Não a horas extras cadastrados nesta empresa !!!</h3>
+
+    {% endfor %}
+
+
+{% endblock %}
