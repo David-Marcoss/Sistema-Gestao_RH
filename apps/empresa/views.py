@@ -11,11 +11,9 @@ class CadastroEmpresaView(CreateView):
     fields = ["nome"]
 
     def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.dono = self.request.user
         form.save()
-        
-        self.request.user.funcionario.empresa = form.instance
-
-        self.request.user.funcionario.save()
         
         return super().form_valid(form)
     
@@ -53,9 +51,9 @@ class ListFuncionarioView(ListView):
 
     def get_queryset(self):
         
-        if self.request.user.funcionario:
-            
-            empresa = self.request.user.funcionario.empresa
+        empresa = self.request.user.empresa.get()
+
+        if empresa:
 
             return empresa.funcionarios.all()
         else:
@@ -67,9 +65,9 @@ class ListDepartamentosView(ListView):
 
     def get_queryset(self):
         
-        if self.request.user.funcionario:
-            
-            empresa = self.request.user.funcionario.empresa
+        empresa = self.request.user.empresa.get()
+
+        if empresa:
 
             return empresa.departamentos.all()
         else:

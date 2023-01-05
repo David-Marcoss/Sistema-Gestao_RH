@@ -53,7 +53,7 @@ class CreateDepartamentoView(CreateView):
     def form_valid(self, form):
         
         departemento = form.save(commit= False)
-        departemento.empresa = self.request.user.funcionario.empresa
+        departemento.empresa = self.request.user.empresa.get()
         departemento.save()
 
         return super().form_valid(form)

@@ -26,10 +26,11 @@
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 
-                {% if request.user.funcionario.empresa %}
+                {% if request.user.empresa.get %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'editar-empresa'  request.user.funcionario.empresa.id %}">Editar Empresa</a>
+                        <a class="nav-link" href="{% url 'editar-empresa'  request.user.empresa.get.id %}">Editar Empresa</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'list-funcionarios' %}">Ver Funcionarios</a>
                     </li>
@@ -39,8 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'banco-horas' %}">Ver Banco de horas</a>
                     </li>
+        
 
-                {% else %}
+                {% elif request.user.is_active %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'cadastrar-empresa'  %}">Cadastrar Empresa</a>    
                     </li>

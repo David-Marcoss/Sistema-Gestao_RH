@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,UpdateView,ListView,DeleteView
 from .models import Empresa
+from .forms import FuncionarioForm
 from apps.funcionarios.models import Funcionario
 from django.contrib.auth.models import User
 
@@ -28,11 +29,7 @@ class DeletFuncionarioView(DeleteView):
     model = Funcionario
     
     def get_success_url(self):
-
-        if self.kwargs['pk'] != self.request.user.funcionario.id:
-            return self.request.GET.get('next', reverse_lazy('home'))
-        else:
-            return reverse_lazy('home')
+        return self.request.GET.get('next', reverse_lazy('home'))
     
     def get_context_data(self, *args,**kwargs):
 
@@ -44,8 +41,7 @@ class DeletFuncionarioView(DeleteView):
 
 class CreateFuncionarioView(CreateView):
     template_name = 'form.html'
-    model = Funcionario
-    fields = ['nome','departamento'] 
+    form_class = FuncionarioForm
 
     def get_context_data(self, *args,**kwargs):
 
@@ -58,7 +54,7 @@ class CreateFuncionarioView(CreateView):
     def form_valid(self, form):
         
         funcionario = form.save(commit= False)
-        funcionario.empresa = self.request.user.funcionario.empresa
+        funcionario.empresa = self.request.user.empresa.get()
         user = User.objects.create(username=funcionario.nome.replace(' ',''))
         funcionario.user = user
         funcionario.save()
@@ -67,6 +63,14 @@ class CreateFuncionarioView(CreateView):
     
     def get_success_url(self):
         return self.request.GET.get('next', reverse_lazy('home'))
+    
+
+    #esta função serve para passar um parametro extra para o formulario
+    def get_form_kwargs(self):
+        kwargs = super(CreateFuncionarioView,self).get_form_kwargs()
+        kwargs.update({'empresa':self.request.user.empresa.get()})
+        
+        return kwargs
     
    
 

@@ -3,11 +3,15 @@
 {% block main %}
 
 
-    <h2>Departamentos da Empresa {{ request.user.funcionario.empresa }}</h2>
+    <h2>Departamentos da Empresa {{ request.user.empresa.get }}</h2>
+    
+    <br>
+    
+    <a class="nav-link" href="{% url 'create-departamento' %}?next={{ request.path }}">
+        <button class="btn btn-lg btn-primary" type="submit">Cadastrar Departamentos</button>
+    </a>
 
-    <li class="nav-item btn-danger">
-        <a class="nav-link" href="{% url 'create-departamento' %}?next={{ request.path }}">Cadastrar Funcionario</a>
-    </li>
+    <br>
 
     {% for departamento in object_list %}
 

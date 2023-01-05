@@ -1,31 +1,45 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 {% block main %}
-
-    <form method="post">
-        <div class="text-center">
-            <img class="mb-4" src="#" alt="" width="75px" height="50px">
-            <h1 class="h4 mb-3 fw-normal">Faça seu Login</h1>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light"> Faça seu Login </h1>
         </div>
-        <div class="form-row">
-            {% csrf_token %}
-        
-            {% for field in form %}
-            <div class="form-floating mb-3">
-                {{field}}
-                {{field.errors}}
-            </div>
-            {% endfor %}
-        
-        </div>
+    </div>
+</section>
 
-        <div class="checkbox mb-3">
-       
-            <a href="#"> Esqueceu a senha?</a>
+<div class="container pb-5">
+    <div class="row">
 
+        <div class="my-3 col-md-2"></div>
+        <div class="my-3 col-md-8">
+            <form method="post" enctype="multipart/form-data" >
+                
+                <div class="form-row text-center">
+                    {% csrf_token %}
+                    
+                    {{ form|bootstrap }}
+                
+                </div>
+    
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-lg btn-primary" type="submit">fazer Login</button>
+                </div>
+            
+            </form>
+
+            <a href="{% url 'cadastro' %}">
+                <button class="btn btn-lg btn-danger">Cadastrar-se</button>
+            </a>
+    
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-    </form>
+        <div class="my-3 col-md-2"></div>
+    </div>
+</div>
+
+
 
 {% endblock %}

@@ -5,15 +5,23 @@
 
     <h2>Banco de horas da Empresa {{ empresa }}</h2>
 
+    <a class="nav-link" href="{% url 'create-hora-extra' %}?next={{ request.path }}"> 
+        <button class="btn btn-lg btn-primary" type="submit">Cadastrar hora extra Funcionario</button>
+    </a>
+    <br>
+
     {% for i in horas %}
 
-        <p>{{i.funcionario}} | {{i.motivo}} | {{i.horas}}</p>
+        <p>
+            {{i.funcionario}} | {{i.motivo}} | {{i.horas}}
+            <a href="{% url 'edit-horas-extras' i.id %}?next={{ request.path }}">Editar</a> 
+            <a href="{% url 'delete-horas-extras' i.id %}?next={{ request.path }}">Excluir</a> 
+        </p>
         <br>
     
         {% empty %}
             <h3>Não a horas extras cadastrados nesta empresa !!!</h3>
 
     {% endfor %}
-
 
 {% endblock %}
