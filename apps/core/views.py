@@ -7,10 +7,8 @@ from .forms import UserCreationForm
 
 @login_required
 def homeView(request):
-    
-    empresa =  request.user.empresa.get()
-    
-    return render(request,template_name='home.html',context = {'empresa':empresa})
+      
+    return render(request,template_name='home.html')
 
 
 class cadastroview(CreateView):

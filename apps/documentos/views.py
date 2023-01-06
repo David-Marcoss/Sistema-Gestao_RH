@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Documento
 from django.views.generic import CreateView,UpdateView,ListView,DeleteView
 from django.urls import reverse_lazy
+from apps.funcionarios.models import Funcionario
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ class DocumentoCreate(CreateView):
     def form_valid(self,form):
               
         documento = form.save(commit= False)
-        documento.usuario = self.request.user.funcionario
+        documento.usuario = Funcionario.objects.get(id=self.kwargs['pk'])
         documento.save()
 
         return super().form_valid(form)

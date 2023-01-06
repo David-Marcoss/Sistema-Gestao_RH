@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 class UpdateFuncionarioView(UpdateView):
     template_name = 'form_funcionario.html'
     model = Funcionario
-    fields = ['nome','departamento']
+    form_class = FuncionarioForm
     
     def get_success_url(self):
         return self.request.GET.get('next', reverse_lazy('home'))
@@ -19,10 +19,17 @@ class UpdateFuncionarioView(UpdateView):
     def get_context_data(self, *args,**kwargs):
 
         context = super().get_context_data(*args,**kwargs)
+        context['funcionario_id'] = self.kwargs['pk']
         context['titulo'] = 'Editar Funcionario'
         context['botao'] = 'Salvar alterações'
 
         return context
+    
+    def get_form_kwargs(self):
+        kwargs = super(UpdateFuncionarioView,self).get_form_kwargs()
+        kwargs.update({'empresa':self.request.user.empresa.get()})
+        
+        return kwargs
 
 class DeletFuncionarioView(DeleteView):
     template_name = 'form.html'
