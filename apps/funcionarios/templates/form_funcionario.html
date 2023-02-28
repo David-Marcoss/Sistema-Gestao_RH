@@ -41,18 +41,49 @@
         <div class="my-3 col-md-2"></div>
     </div>
 
-    <divdiv class="row">
+
+    <div class="row">
         <br>
-        <a  href="{% url 'cadastrar-documento' funcionario_id %}?next={{ request.path }}"><button class="btn btn-lg btn-primary" type="submit">Cadastrar documento</button></a>
+    
+        <h3>Documentos do funcionario:</h3>
+        <ul>
+            {% for i in object.documentos.all %}
+                <br>
+                <li><a  href="{{i.arquivo.url}}">{{i.descricao}}</a></li>
+            {% endfor%}
+
+            </ul>
+
+        <br>
+        <a  href="{% url 'cadastrar-documento' funcionario_id %}?next={{ request.path }}">
+            <button class="btn btn-lg btn-primary" type="submit">Cadastrar documento</button>
+        </a>
+
+
     </div>
 
     <div class="row">
         <br>
-        <h3>Documentos do funcionario:</h3>
-        {% for i in object.documentos.all %}
-            <br>
-            <a  href="{{i.arquivo.url}}">{{i.descricao}}</a>
-        {% endfor%}
+    
+        <h3>Banco de horas do funcionario:</h3>
+        
+        <ul>
+            {% for i in object.horas_extras.all %}
+                <br>
+                <li>{{i.motivo}}| {{i.horas}} 
+                    <a href="{% url 'edit-horas-extras' i.id %}?next={{ request.path }}">Editar</a> 
+                    <a href="{% url 'delete-horas-extras' i.id %}?next={{ request.path }}">Excluir</a> 
+                </li>
+            {% endfor%}
+
+            </ul>
+
+        <br>
+
+        <h4>total horas: {{ object.get_total_horas_ex }}</h4>
+        
+
+
     </div>
     
 </div>

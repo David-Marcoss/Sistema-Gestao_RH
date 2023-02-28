@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from apps.departamentos.models import Departamento
 from apps.empresa.models import Empresa
+from django.db.models import Sum
 
 # Create your models here.
 class Funcionario(models.Model):
@@ -12,3 +13,8 @@ class Funcionario(models.Model):
 
     def __str__(self):
         return self.nome
+
+    
+    @property
+    def get_total_horas_ex(self):
+        return self.horas_extras.all().aggregate(Sum('horas'))['horas__sum']
