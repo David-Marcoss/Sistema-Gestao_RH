@@ -1,6 +1,9 @@
+import json
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView,UpdateView,ListView,DeleteView
 
 from apps.funcionarios.models import Funcionario
@@ -50,7 +53,7 @@ class CreateHoraExtraView(CreateView):
    
 
 class EditHoraExtraView(UpdateView):
-    template_name = 'form.html'
+    template_name = 'hora_extra/horas_extra_form.html'
     model = Hora_extra
     fields = ['motivo','funcionario','horas']  
 
@@ -81,3 +84,23 @@ class DeleteHoraExtraView(DeleteView):
         context['botao'] = 'Confirmar'
 
         return context
+
+class UtilizarHoraExtraView(View):
+    
+    def post(self, *args, **kwargs):
+
+        hora_utilizada = Hora_extra.objects.get(pk=kwargs['pk'])
+        horas = hora_utilizada.horas
+
+
+        if hora_utilizada.horas_utilizadas:
+            hora_utilizada.horas_utilizadas = False
+            response =  json.dumps({"mensagem": f" {horas} utilizadas!!!"})
+        else:
+            hora_utilizada.horas_utilizadas = True
+            response =  json.dumps({"mensagem": f" {horas} nao utilizadas!!!"})
+
+        hora_utilizada.save()
+
+
+        return HttpResponse(response,content_type = 'aplication/json')

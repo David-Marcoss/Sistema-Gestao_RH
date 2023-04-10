@@ -16,5 +16,9 @@ class Funcionario(models.Model):
 
     
     @property
-    def get_total_horas_ex(self):
-        return self.horas_extras.all().aggregate(Sum('horas'))['horas__sum']
+    def get_total_horas_ex_utilizadas(self):
+        return self.horas_extras.filter(horas_utilizadas = True).aggregate(Sum('horas'))['horas__sum']
+    
+    @property
+    def get_total_horas_ex_nao_utilizadas(self):
+        return self.horas_extras.filter(horas_utilizadas = False).aggregate(Sum('horas'))['horas__sum']

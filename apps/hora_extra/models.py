@@ -9,6 +9,7 @@ class Hora_extra(models.Model):
     funcionario = models.ForeignKey(Funcionario,on_delete=models.PROTECT,related_name='horas_extras')
     empresa = models.ForeignKey(Empresa,on_delete=models.PROTECT,related_name='horas_extras')
     horas = models.DecimalField(max_digits=5,decimal_places=2)
+    horas_utilizadas = models.BooleanField(default=False)
 
     def __str__(self):
         return self.motivo
