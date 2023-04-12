@@ -5,11 +5,27 @@
 
     <h2>Banco de horas da Empresa {{ empresa }}</h2>
 
-    <a class="nav-link" href="{% url 'create-hora-extra' %}?next={{ request.path }}"> 
-        <button class="btn btn-lg btn-primary" type="submit">Cadastrar hora extra Funcionario</button>
-    </a>
-    <br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create-hora-extra' %}?next={{ request.path }}"> 
+                    Cadastrar hora extra Funcionario
+                </a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'banco-horas-csv' %}"> 
+                    Gerar registro de horas csv
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'banco-horas-excel' %}"> 
+                    Gerar registro de horas Excel
+                </a>
+            </li>
+        </ul>
+    </nav>
     {% for i in horas %}
 
         <p>

@@ -8,3 +8,7 @@ class Departamento(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    @property
+    def num_funcionarios(self):
+        return self.funcionarios.all().count()

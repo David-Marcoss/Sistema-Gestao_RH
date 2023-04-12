@@ -1,0 +1,8 @@
+<h1> Relatorio de Departamentos da Empresa {{ empresa }} </h1>
+
+{% for dp in departamentos %}
+
+    <p>Departamento: {{ dp }} numero de funcionarios: {{ dp.num_funcionarios }}</p>
+
+{% endfor %}
+

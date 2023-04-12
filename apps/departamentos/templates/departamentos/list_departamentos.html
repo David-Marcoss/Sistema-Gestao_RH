@@ -13,6 +13,10 @@
 
     <br>
 
+    <a class="nav-link" href="{% url 'relatorio-departamentos' %}"> 
+        <button class="btn btn-lg btn-primary" type="submit">Gerar Relatorio de Departamentos</button>
+    </a>
+
     {% for departamento in object_list %}
 
         <p>{{ departamento }} : 

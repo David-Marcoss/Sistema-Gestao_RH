@@ -8,6 +8,13 @@
     <a class="nav-link" href="{% url 'create-funcionario' %}?next={{ request.path }}"> 
         <button class="btn btn-lg btn-primary" type="submit">Cadastrar Funcionario</button>
     </a>
+
+    <br>
+    
+    <a class="nav-link" href="{% url 'relatorio-funcionarios' %}"> 
+        <button class="btn btn-lg btn-primary" type="submit">Gerar Relatorio de Funcionarios</button>
+    </a>
+
     <br>
 
     {% for funcionario in object_list %}

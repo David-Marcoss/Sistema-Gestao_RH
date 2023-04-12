@@ -7,7 +7,6 @@ from .forms import FuncionarioForm
 from apps.funcionarios.models import Funcionario
 from django.contrib.auth.models import User
 
-
 class UpdateFuncionarioView(UpdateView):
     template_name = 'form_funcionario.html'
     model = Funcionario
@@ -78,7 +77,3 @@ class CreateFuncionarioView(CreateView):
         kwargs.update({'empresa':self.request.user.empresa.get()})
         
         return kwargs
-    
-   
-
-
