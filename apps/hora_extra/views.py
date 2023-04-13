@@ -11,6 +11,9 @@ from .models import Hora_extra
 from .forms import HoraExtraForm
 from django.contrib.auth.decorators import login_required
 
+from .api.serializers import Hora_ExtraSerializer 
+from rest_framework import viewsets
+
 
 import xlwt    
 import csv
@@ -175,3 +178,9 @@ class registro_horas_extras_Excel(View):
         wb.save(response)
 
         return response
+    
+    # ViewSets define the view behavior.
+class Hora_ExtraViewSet(viewsets.ModelViewSet):
+    queryset = Hora_extra.objects.all()
+    serializer_class = Hora_ExtraSerializer
+

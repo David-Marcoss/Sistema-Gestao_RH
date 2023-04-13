@@ -7,6 +7,11 @@ from .forms import FuncionarioForm
 from apps.funcionarios.models import Funcionario
 from django.contrib.auth.models import User
 
+from .api.serializers import FuncionarioSerializer 
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
 class UpdateFuncionarioView(UpdateView):
     template_name = 'form_funcionario.html'
     model = Funcionario
@@ -77,3 +82,13 @@ class CreateFuncionarioView(CreateView):
         kwargs.update({'empresa':self.request.user.empresa.get()})
         
         return kwargs
+
+
+# ViewSets define the view behavior.
+class FuncionarioViewSet(viewsets.ModelViewSet):
+    queryset = Funcionario.objects.all()
+    serializer_class = FuncionarioSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+

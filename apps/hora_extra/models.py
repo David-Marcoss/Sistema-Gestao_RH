@@ -13,4 +13,4 @@ class Hora_extra(models.Model):
 
     def __str__(self):
         return self.motivo
-    
+
