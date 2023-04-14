@@ -6,3 +6,8 @@ reportlab==3.6.12
 django-framework==0.1.87
 Markdown==3.4.3
 django-filter==23.1
+celery==5.2.7
+django-celery-results==2.5.0 
+redis==4.5.4
+Pillow==9.5.0
+django-celery-beat==2.5.0 

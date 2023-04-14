@@ -32,6 +32,11 @@ INSTALLED_APPS = [
    
    'rest_framework',
    'rest_framework.authtoken',
+
+   'django_celery_results',
+   'django_celery_beat',
+   
+
 ]
 
 REST_FRAMEWORK = {
@@ -128,3 +133,25 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = 'login'             
 LOGIN_REDIRECT_URL = 'home'     
 LOGOUT_REDIRECT_URL = 'login'
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'contato@devacademy.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'contato@devacademy.com'
+EMAIL_HOST_PASSWORD = 'ztyuodophslszhms'
+EMAIL_PORT = 587
+
+CONTACT_EMAIL = 'contato@devacademy.com'

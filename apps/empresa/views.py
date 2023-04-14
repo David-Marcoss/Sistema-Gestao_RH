@@ -7,6 +7,8 @@ from apps.funcionarios.models import Funcionario
 from apps.departamentos.models import Departamento
 
 from django.contrib.auth.decorators import login_required
+from .task import envia_email
+
 
 import io
 from django.http import FileResponse, HttpResponse
@@ -149,3 +151,15 @@ class relatorio_departamentos(View):
             'empresa': empresa,
         }
         return Render.render('empresa/relatorio.html', params, 'relatorio')
+
+
+def Enviar_relatorio_departamentos_email(request):
+
+    template_name = 'empresa/relatorio.html'
+
+    print(request.user.email)
+    
+    envia_email.delay(request.user.empresa.get().id,request.user.email,template_name)
+
+
+    return HttpResponse("Relatorio enviado com sucesso!!")

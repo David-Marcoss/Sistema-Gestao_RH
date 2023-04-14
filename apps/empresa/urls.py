@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CadastroEmpresaView,UpdateEmpresaView,ListFuncionarioView,ListDepartamentosView,relatorio_funcionarios,relatorio_departamentos
+from .views import *
 
 urlpatterns = [
     path('cadastrar/',CadastroEmpresaView.as_view(),name='cadastrar-empresa'),
@@ -8,6 +8,7 @@ urlpatterns = [
     path('relatorio-funcionarios',relatorio_funcionarios,name='relatorio-funcionarios'),
     path('relatorio-departamentos',relatorio_departamentos.as_view(),name='relatorio-departamentos'),
     path('lista-departamentos/',ListDepartamentosView.as_view(),name='list-departamentos'),
+    path('relatorio-departamentos-email',Enviar_relatorio_departamentos_email,name='relatorio-departamentos-email'),
 
     
 ]
