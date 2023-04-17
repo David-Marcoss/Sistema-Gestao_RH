@@ -28,6 +28,7 @@ urlpatterns = [
     path("funcionarios/",include('apps.funcionarios.urls')),
     path("empresa/",include('apps.empresa.urls')),
     path("hora-extra/",include('apps.hora_extra.urls')),
+    path("app-antigo/",include('apps.app_antigo.urls')),
 
     path('login/',auth_views.LoginView.as_view(template_name = 'login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(),name='logout'),

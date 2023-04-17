@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "apps.departamentos",
     "apps.documentos",
     "apps.hora_extra",
+    "apps.app_antigo",
    
    'rest_framework',
    'rest_framework.authtoken',
@@ -86,9 +87,32 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+    },
+
+    "antigo": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db_antigo.sqlite3",
+    },
+    
+    'postgres': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'gestao_rh_postgre',
+
+        'USER': 'user_gestao_rh',
+
+        'PASSWORD': 'gestao_rh123',
+
+        'HOST': 'localhost',
+
+        'PORT': '',
+
     }
 }
 
+#configuação para que o admin do django reconheça banco de dados antigo
+DATABASE_ROUTERS = ['Gestao_RH.DbRouters.DBRoutes']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
