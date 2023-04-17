@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block main %}
 
-  <h1>Bem vindo {{request.user}}</h1>
+  <h1> {% trans 'Bem vindo'%} {{request.user}}</h1>
+  <h2>{% trans 'Gerencie facilmente sua empresa com nosso sistema.'%}</h2>
 
 {% endblock %}
